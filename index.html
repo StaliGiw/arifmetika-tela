@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#edf5ff">
+  <title>Арифметика тела — картотека</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <main class="app-shell">
+    <header class="topbar">
+      <button class="brand" data-route="home" aria-label="На главную">
+        <span class="brand-mark">А</span>
+        <span><strong>Кабинет «Арифметика тела»</strong><small>Массаж в Валуйках</small></span>
+      </button>
+      <div class="top-actions"><span class="save-state"><i></i> Все изменения сохранены</span><button class="icon-btn" data-route="settings" aria-label="Настройки">⚙</button></div>
+    </header>
+
+    <section id="home" class="page active">
+      <div class="welcome"><p>Локальная картотека</p><h1>Добрый день!</h1><span>Выберите нужный раздел</span></div>
+      <label class="global-search"><span>⌕</span><input id="homeSearch" placeholder="Поиск по имени, телефону или категории…" autocomplete="off"></label>
+      <div class="dashboard-grid">
+        <button class="feature-card blue" data-route="patients"><span class="feature-icon">♙</span><span><strong>Пациенты</strong><small>Карточки и история</small></span><b>›</b></button>
+        <button class="feature-card green" id="quickAdd"><span class="feature-icon">＋</span><span><strong>Новый пациент</strong><small>Создать карточку</small></span><b>›</b></button>
+        <button class="feature-card purple" data-route="stats"><span class="feature-icon">▥</span><span><strong>Статистика</strong><small>Приёмы и доход</small></span><b>›</b></button>
+        <button class="feature-card orange" data-route="settings"><span class="feature-icon">⇅</span><span><strong>Резервная копия</strong><small>Сохранить или перенести базу</small></span><b>›</b></button>
+      </div>
+    </section>
+
+    <section id="patients" class="page">
+      <div class="section-head"><div><button class="back" data-route="home">← На главную</button><h1>Пациенты</h1><p>Карточки, заметки и история приёмов</p></div><button class="primary" id="addPatient">＋ Новый пациент</button></div>
+      <div class="patient-layout">
+        <aside class="patient-list-panel glass">
+          <label class="search"><span>⌕</span><input id="patientSearch" placeholder="Имя, телефон, категория…"></label>
+          <div class="chips" id="filterChips"><button class="chip active" data-filter="all">Все</button><button class="chip" data-filter="Постоянный">Постоянные</button><button class="chip" data-filter="Реабилитация">Реабилитация</button></div>
+          <div id="patientList" class="patient-list"></div>
+        </aside>
+        <article id="patientDetail" class="patient-detail glass empty-state"><div><span class="empty-icon">♙</span><h2>Выберите пациента</h2><p>Или создайте первую карточку — достаточно указать имя.</p><button class="primary" id="emptyAdd">＋ Новый пациент</button></div></article>
+      </div>
+    </section>
+
+    <section id="stats" class="page">
+      <div class="section-head"><div><button class="back" data-route="home">← На главную</button><h1>Статистика</h1><p>Фактически проведённые приёмы и полученная оплата</p></div><label class="month-picker">Месяц <input type="month" id="statsMonth"></label></div>
+      <div class="metric-grid"><article class="metric blue"><small>Доход за месяц</small><strong id="monthIncome">0 ₽</strong><span>Оплаченные приёмы</span></article><article class="metric green"><small>Всего приёмов</small><strong id="monthVisits">0</strong><span id="visitBreakdown">Первичных: 0</span></article><article class="metric purple"><small>Средний чек</small><strong id="averageCheck">0 ₽</strong><span>За оплаченный приём</span></article><article class="metric orange"><small>Ожидает оплаты</small><strong id="unpaidTotal">0 ₽</strong><span id="unpaidCount">0 приёмов</span></article></div>
+      <div class="glass stats-table"><div class="card-title"><h2>Приёмы за месяц</h2></div><div id="statsRows"></div></div>
+    </section>
+
+    <section id="settings" class="page">
+      <div class="section-head"><div><button class="back" data-route="home">← На главную</button><h1>Резервная копия</h1><p>Переносите всю картотеку одним файлом</p></div></div>
+      <div class="settings-grid">
+        <article class="glass settings-card"><span class="settings-icon blue-bg">↓</span><h2>Сохранить базу</h2><p>Пациенты, история приёмов, категории и суммы попадут в один файл.</p><button class="primary" id="exportDb">Сохранить в файл</button></article>
+        <article class="glass settings-card"><span class="settings-icon green-bg">↑</span><h2>Загрузить базу</h2><p>Перед загрузкой текущая база автоматически сохранится в резервный файл.</p><button class="secondary" id="importDb">Выбрать файл</button><input type="file" id="importFile" accept="application/json" hidden></article>
+      </div>
+      <p class="privacy-note">🔒 Данные хранятся локально в этом браузере и никуда не отправляются.</p>
+    </section>
+  </main>
+
+  <dialog id="patientDialog"><form id="patientForm" method="dialog"><div class="dialog-head"><div><small id="patientFormMode">Новая карточка</small><h2>Данные пациента</h2></div><button type="button" class="dialog-close" data-close>×</button></div><div class="form-section blue-form"><h3>Основные данные</h3><div class="form-grid"><label>Фамилия<input name="lastName" placeholder="Введите фамилию"></label><label>Имя *<input name="firstName" required placeholder="Введите имя"></label><label>Отчество<input name="middleName" placeholder="Введите отчество"></label><label>Дата рождения<input name="birthDate" type="date"></label><label>Телефон<input name="phone" type="tel" placeholder="+7 900 000-00-00"></label><label>Дополнительный телефон<input name="secondPhone" type="tel" placeholder="Необязательно"></label></div></div><div class="form-section green-form"><h3>Обращение</h3><label>Жалобы и цель обращения<textarea name="complaints" placeholder="Что беспокоит пациента, какую цель он хочет достичь…"></textarea></label><label>Диагноз со слов пациента<textarea name="diagnosis" placeholder="Необязательно"></textarea></label></div><div class="form-section red-form"><h3>Важная информация</h3><label>Противопоказания, ограничения, аллергии<textarea name="warnings" placeholder="Укажите важные ограничения…"></textarea></label></div><div class="form-section purple-form"><h3>Категории</h3><div class="category-picker" id="categoryPicker"></div></div><label class="wide-label">Заметки<textarea name="notes" placeholder="Дополнительная информация о пациенте…"></textarea></label><div class="dialog-actions"><span>* Обязательное поле</span><button type="button" class="secondary" data-close>Отмена</button><button type="submit" class="primary">Сохранить карточку</button></div></form></dialog>
+
+  <dialog id="visitDialog"><form id="visitForm" method="dialog"><div class="dialog-head"><div><small>История пациента</small><h2>Добавить приём</h2></div><button type="button" class="dialog-close" data-close>×</button></div><div class="form-grid"><label>Дата *<input name="date" type="date" required></label><label>Тип приёма<select name="type"><option>Повторный</option><option>Первичный</option></select></label><label>Длительность, минут<input name="duration" type="number" min="0" step="5" value="60"></label><label>Стоимость, ₽ *<input name="price" type="number" min="0" step="100" required value="2000"></label><label>Оплата<select name="paymentStatus"><option value="paid">Оплачено</option><option value="unpaid">Не оплачено</option><option value="partial">Частично</option></select></label><label>Получено, ₽<input name="paidAmount" type="number" min="0" step="100" value="2000"></label></div><label class="wide-label">Что делали *<textarea name="procedure" required placeholder="Зона, вид массажа, применённые техники…"></textarea></label><label class="wide-label">Состояние после процедуры<textarea name="result" placeholder="Реакция пациента, изменения состояния…"></textarea></label><label class="wide-label">Рекомендации<textarea name="recommendations" placeholder="Рекомендации до следующего приёма…"></textarea></label><div class="dialog-actions"><span></span><button type="button" class="secondary" data-close>Отмена</button><button type="submit" class="primary">Сохранить приём</button></div></form></dialog>
+
+  <div id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>

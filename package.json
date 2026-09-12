@@ -1,0 +1,36 @@
+{
+  "name": "arifmetika-tela-card-index",
+  "version": "0.1.0",
+  "private": true,
+  "main": "electron-main.js",
+  "description": "Локальная картотека кабинета «Арифметика тела»",
+  "author": "StaliGiw",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/calculations.test.js",
+    "build:win": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^22.3.27",
+    "electron-builder": "24.13.3"
+  },
+  "build": {
+    "appId": "ru.valuiki.arifmetikatela",
+    "productName": "Арифметика тела",
+    "artifactName": "Arifmetika-Tela-${version}-portable.${ext}",
+    "files": [
+      "index.html",
+      "styles.css",
+      "app.js",
+      "calculations.js",
+      "electron-main.js",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "signAndEditExecutable": false
+    }
+  }
+}
