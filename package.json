@@ -1,13 +1,13 @@
 {
   "name": "arifmetika-tela-card-index",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "main": "electron-main.js",
   "description": "Локальная картотека кабинета «Арифметика тела»",
   "author": "StaliGiw",
   "scripts": {
     "start": "electron .",
-    "test": "node --test tests/calculations.test.js",
+    "test": "node --test tests/calculations.test.js tests/database-store.test.js",
     "build:win": "electron-builder --win nsis"
   },
   "devDependencies": {
@@ -23,6 +23,8 @@
       "styles.css",
       "compact.css",
       "app.js",
+      "preload.js",
+      "database-store.js",
       "calculations.js",
       "electron-main.js",
       "package.json"
