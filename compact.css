@@ -1,0 +1,18 @@
+html,body{width:100%;height:100%;overflow:hidden}
+.app-shell{height:100vh;padding:16px 28px 20px;display:flex;flex-direction:column;overflow:hidden}
+.topbar{margin-bottom:14px;flex:none}
+.page{min-height:0}
+.page.active{display:flex;flex:1;min-height:0;flex-direction:column;overflow:hidden}
+.global-search{width:min(930px,90%);margin:16px auto;padding:0 22px;flex:none}
+.global-search input{padding:14px}
+.dashboard-grid{width:min(1220px,100%);grid-template-rows:1fr 1fr;gap:16px;flex:1;min-height:0}
+.feature-card{min-height:0;padding:22px 32px}
+.feature-icon{width:82px;height:82px;font-size:40px}
+.patient-layout{flex:1;min-height:0}
+.patient-list-panel{overflow:hidden;display:flex;flex-direction:column}
+.patient-list{overflow-y:auto;min-height:0;padding-right:3px}
+.patient-detail{overflow:hidden;display:flex;flex-direction:column}
+.history{min-height:0;display:flex;flex-direction:column}
+.visit-list{overflow-y:auto;min-height:0}
+.stats-table{overflow-y:auto;min-height:0}
+@media(max-height:800px) and (min-width:901px){.app-shell{padding:10px 24px 14px}.topbar{margin-bottom:8px}.brand-mark{width:46px;height:46px}.brand strong{font-size:20px}.welcome h1{font-size:34px}.welcome p,.welcome span{font-size:13px}.global-search{margin:10px auto}.global-search input{padding:11px}.feature-card{padding:16px 28px}.feature-icon{width:65px;height:65px;font-size:32px}.feature-card strong{font-size:24px}.section-head{margin-bottom:10px}.section-head h1{font-size:30px;margin:6px 0 2px}.info-card{min-height:145px;padding:16px}.patient-title{margin-bottom:10px}.history{margin-top:8px;padding:12px}.metric{padding:15px}.metric strong{font-size:27px;margin:8px 0}.stats-table{margin-top:12px;padding:18px}}

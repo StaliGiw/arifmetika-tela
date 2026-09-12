@@ -1,6 +1,6 @@
 {
   "name": "arifmetika-tela-card-index",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "main": "electron-main.js",
   "description": "Локальная картотека кабинета «Арифметика тела»",
@@ -8,7 +8,7 @@
   "scripts": {
     "start": "electron .",
     "test": "node --test tests/calculations.test.js",
-    "build:win": "electron-builder --win portable"
+    "build:win": "electron-builder --win nsis"
   },
   "devDependencies": {
     "electron": "^22.3.27",
@@ -17,10 +17,11 @@
   "build": {
     "appId": "ru.valuiki.arifmetikatela",
     "productName": "Арифметика тела",
-    "artifactName": "Arifmetika-Tela-${version}-portable.${ext}",
+    "artifactName": "Arifmetika-Tela-Setup-${version}.${ext}",
     "files": [
       "index.html",
       "styles.css",
+      "compact.css",
       "app.js",
       "calculations.js",
       "electron-main.js",
@@ -28,9 +29,17 @@
     ],
     "win": {
       "target": [
-        "portable"
+        "nsis"
       ],
       "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": "always",
+      "createStartMenuShortcut": true,
+      "shortcutName": "Арифметика тела",
+      "runAfterFinish": true
     }
   }
 }
